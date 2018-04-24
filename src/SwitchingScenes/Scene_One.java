@@ -2,29 +2,47 @@ package SwitchingScenes;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
+import javafx.geometry.Insets;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 
 
 public class Scene_One extends GridPane {
 
+
     public Scene_One() {
 
         setVgap(10);
         setHgap(10);
+        setPadding(new Insets(10));
 
-        Button aButton = new Button("Switch to Two");
-        Button bButton = new Button("Click me 2");
+        ListView<PersonInfo> theListView = new ListView<>();
 
-        add(aButton,0,0);
-        add(bButton,0,1);
+        theListView.setItems(PersonCol.getTheCollection());
 
-        aButton.setOnAction(new EventHandler<ActionEvent>() {
+        ContextMenu acontext = new ContextMenu();
+        MenuItem amenuItem = new MenuItem("Open details");
+        acontext.getItems().add(amenuItem);
+
+        amenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Scene_Library.switchToTwo();
+
+                PersonInfo bw = theListView.getSelectionModel().getSelectedItem();
+                if (bw == null) {
+                    return;
+                }
+
+                ANewWindow b = new ANewWindow(new InfoPane(bw));
+                b.setTitle(bw.getFirstname() + " " + bw.getLastname());
+                b.show();
             }
         });
+
+        theListView.setContextMenu(acontext);
+        add(theListView,0,0);
 
     }
 }
