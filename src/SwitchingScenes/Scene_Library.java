@@ -13,17 +13,16 @@ public abstract class Scene_Library {
 
     public static void switchTo(TheScenes enm) {
 
-        GridPane xwz = null;
+        GridPane centerinpane = null;
         switch (enm) {
             case ONE:
-                xwz = sceneone;
+                centerinpane = sceneone;
                 break;
             case TWO:
-                xwz = scenetwo;
+                centerinpane = scenetwo;
                 break;
         }
-        pane.setCenter(xwz);
-        pane.prefHeight(300);
+        pane.setCenter(centerinpane);
     }
 
     public static void setThePane(BorderPane root) {

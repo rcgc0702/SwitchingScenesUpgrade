@@ -10,21 +10,27 @@ public class TheMenu extends MenuBar {
 
     public TheMenu() {
 
-        Menu a1 = new Menu("Change scene");
-        MenuItem a12 = new MenuItem("All Records");
-        MenuItem a11 = new MenuItem("Enter Records");
+        /*
+        Contents:
+        1. MenuBar/MenuItem
+        2. Button to switch scenes
+         */
 
-        getMenus().add(a1);
-        a1.getItems().addAll(a11,a12);
+        Menu manage_task = new Menu("Manage Task");
+        MenuItem all_records = new MenuItem("All Records");
+        MenuItem enter_records = new MenuItem("Enter Records");
 
-        a11.setOnAction(new EventHandler<ActionEvent>() {
+        getMenus().add(manage_task);
+        manage_task.getItems().addAll(enter_records,all_records);
+
+        enter_records.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Scene_Library.switchTo(TheScenes.TWO);
             }
         });
 
-        a12.setOnAction(new EventHandler<ActionEvent>() {
+        all_records.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Scene_Library.switchTo(TheScenes.ONE);

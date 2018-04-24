@@ -9,7 +9,7 @@ public class ANewWindow extends Stage {
 
     public ANewWindow(GridPane pane) {
 
-        setScene(new Scene(pane,300,500));
+        setScene(new Scene(pane,300,200));
 
     }
 }

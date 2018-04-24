@@ -22,6 +22,12 @@ public class Scene_Two extends GridPane {
 
     public Scene_Two() {
 
+        /*
+        Contents:
+        1. Textfields (for input)
+        2. Button (sumbit entry)
+         */
+
         setHgap(10);
         setVgap(10);
         setPadding(new Insets(10));
