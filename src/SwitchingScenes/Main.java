@@ -12,7 +12,7 @@ public class Main extends Application {
 
         BorderPane root = new TheBPane();
         primaryStage.setTitle("Switching Scenes");
-        primaryStage.setScene(new Scene(root, 340, 275));
+        primaryStage.setScene(new Scene(root, 350, 275));
         Scene_Library.setThePane(root);
         Scene_Library.setTheStage(primaryStage);
         primaryStage.setResizable(false);

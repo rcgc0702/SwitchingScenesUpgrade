@@ -1,18 +1,16 @@
 package SwitchingScenes;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
 
 
 public class Scene_One extends GridPane {
-
 
     public Scene_One() {
 
@@ -25,29 +23,22 @@ public class Scene_One extends GridPane {
         setVgap(10);
         setHgap(10);
         setPadding(new Insets(10));
+        ClipboardContent cb = new ClipboardContent();
 
         ListView<PersonInfo> theListView = new ListView<>();
         theListView.setItems(PersonCol.getTheCollection());
 
         ContextMenu listContextMenu = new ContextMenu();
-        MenuItem amenuItem = new MenuItem("Open details...");
-        listContextMenu.getItems().add(amenuItem);
+        MenuItem openDetails = new MenuItem("Open details...");
+        MenuItem copyToClipBoard = new MenuItem("Copy to clipboard");
+        MenuItem sortList = new MenuItem("Sort list");
+        SeparatorMenuItem separator = new SeparatorMenuItem();
+        listContextMenu.getItems().addAll(sortList, separator, openDetails, copyToClipBoard);
 
-        amenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        openDetails.setOnAction(RunEvents.open(theListView));
+        copyToClipBoard.setOnAction(RunEvents.copy(theListView, cb));
+        sortList.setOnAction(RunEvents.sort());
 
-                PersonInfo bw = theListView.getSelectionModel().getSelectedItem();
-                if (bw == null) {
-                    return;
-                }
-
-                ANewWindow b = new ANewWindow(new InfoPane(bw));
-                b.setTitle(bw.getFirstname() + " " + bw.getLastname());
-                b.initModality(Modality.APPLICATION_MODAL);
-                b.show();
-            }
-        });
         theListView.setContextMenu(listContextMenu);
         getColumnConstraints().add(new ColumnConstraints(300));
 

@@ -2,8 +2,18 @@ package SwitchingScenes;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.ListView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 
 public class PersonInfo {
+
+    /*
+    Note:
+    - copyToClipboard() - copies information into the system clipboard
+     */
 
     private StringProperty firstname;
     private StringProperty lastname;
@@ -63,6 +73,15 @@ public class PersonInfo {
 
     public void setResidence(String residence) {
         this.residence.set(residence);
+    }
+
+    public void copyToClipBoard(ClipboardContent cb) {
+        cb.clear();
+        cb.putString("First name: " + getFirstname() +
+                "\nLast name: " + getLastname() +
+                "\nLocation: " + getCity() + ", " + getResidence());
+
+        Clipboard.getSystemClipboard().setContent(cb);
     }
 
     @Override
